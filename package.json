@@ -18,17 +18,21 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
+    "node": "^17.3.0",
     "node-cron": "^3.0.0",
     "nodemon": "^2.0.15"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/basileLeroy/button-bot-backend"
+    "url": "git+https://github.com/basileLeroy/button-bot-backend.git"
   },
   "author": "Basile Leroy <basile.leroy.jnm@hotmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/basileLeroy/button-bot-backend/issues"
   },
-  "homepage": "https://github.com/basileLeroy/button-bot-backend#readme"
+  "homepage": "https://github.com/basileLeroy/button-bot-backend#readme",
+  "main": "app.js",
+  "devDependencies": {},
+  "description": ""
 }

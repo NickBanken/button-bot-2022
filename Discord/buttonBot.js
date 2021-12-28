@@ -3,8 +3,7 @@ const router = express.Router();
 
 const { Client, Intents, Guild } = require("discord.js");
 const cron = require("node-cron");
-const { token } = require('../config.json');
-// const token = process.env.BOT_TOKEN;
+const token = process.env['BOT_TOKEN']
 const { promotions } = require("./promotions");
 const { testServers } = require("./test-servers");
 const { buildMessage } = require("./generateMessage");
@@ -72,27 +71,25 @@ router.get("/", function(req, res, next) {
         console.log("READY!");
         const guilds = client.guilds.cache.map(guild => guild);
 
-//     // Test Cron scheduler
-//     cron.schedule("0 34 16 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-//       composeMessage(guilds);
-//     });
+        // Test Cron scheduler
+        // cron.schedule("0 34 16 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+        //   composeMessage(guilds);
+        // });
 
-//     // Actual Cron schedules
-//     cron.schedule("0 55 8 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-//       composeMessage(guilds);
-//     });
-//     cron.schedule("0 31 11 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-//       console.log("test");
-//       composeMessage(guilds);
-//     });
-//     cron.schedule("0 25 12 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-//       composeMessage(guilds);
-//     });
-//     cron.schedule("0 0 16 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-//       composeMessage(guilds);
-//     });
-
-        // composeMessage(guilds);
+        // Actual Cron schedules
+        cron.schedule("0 55 8 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+          composeMessage(guilds);
+        });
+        cron.schedule("0 31 11 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+          console.log("test");
+          composeMessage(guilds);
+        });
+        cron.schedule("0 25 12 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+          composeMessage(guilds);
+        });
+        cron.schedule("0 0 16 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+          composeMessage(guilds);
+        });
 
         const date = new Date().toLocaleString("en-US", {
             timeZone: "Europe/Brussels"
