@@ -1,9 +1,12 @@
 {
   "name": "bot",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "engines": {
+    "node": "16.x"
+  },
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -17,5 +20,15 @@
     "morgan": "~1.9.1",
     "node-cron": "^3.0.0",
     "nodemon": "^2.0.15"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/basileLeroy/button-bot-backend"
+  },
+  "author": "Basile Leroy <basile.leroy.jnm@hotmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/basileLeroy/button-bot-backend/issues"
+  },
+  "homepage": "https://github.com/basileLeroy/button-bot-backend#readme"
 }

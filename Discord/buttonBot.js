@@ -3,19 +3,16 @@ const router = express.Router();
 
 const { Client, Intents, Guild } = require("discord.js");
 const cron = require("node-cron");
-// const token = process.env.DISCORD_BOT_TOKEN;
-// const port = process.env.PORT;
-const token = process.env.BOT_TOKEN;
+const { token } = require('../config.json');
+// const token = process.env.BOT_TOKEN;
 const { promotions } = require("./promotions");
 const { testServers } = require("./test-servers");
 const { buildMessage } = require("./generateMessage");
 
 router.get("/", function(req, res, next) {
-    // res.header("Access-Control-Allow-Origin", "*");
-    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    // res.header("Access-Control-Allow-Credentials", true);
-    // res.header("Access-Control-Allow-Origin", "*");
-    let botMessage;
+
+    let botStatus;
+
     // Create a new client instance
     const client = new Client({
         intents: [Intents.FLAGS.GUILDS],
@@ -33,9 +30,7 @@ router.get("/", function(req, res, next) {
         guilds.map((guild, key) => {
             // All channels on all Discord servers
             guild.channels.cache.map(channel => {
-                // All promotions
 
-                // Change testServers to promotions before production!
                 testServers.forEach((promo, index) => {
                     thisGuild = promo.guild_id;
                     discordChannel = promo.channel_id;
@@ -77,43 +72,43 @@ router.get("/", function(req, res, next) {
         console.log("READY!");
         const guilds = client.guilds.cache.map(guild => guild);
 
-        // Test Cron scheduler
-        cron.schedule("0 8 17 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-            composeMessage(guilds);
-        });
+//     // Test Cron scheduler
+//     cron.schedule("0 34 16 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+//       composeMessage(guilds);
+//     });
 
-        // Actual Cron schedules
-        cron.schedule("0 55 8 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-            composeMessage(guilds);
-        });
-        cron.schedule("0 31 11 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-            console.log("test");
-            composeMessage(guilds);
-        });
-        cron.schedule("0 25 12 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-            composeMessage(guilds);
-        });
-        cron.schedule("0 1 16 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-            composeMessage(guilds);
-        });
-        composeMessage(guilds);
+//     // Actual Cron schedules
+//     cron.schedule("0 55 8 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+//       composeMessage(guilds);
+//     });
+//     cron.schedule("0 31 11 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+//       console.log("test");
+//       composeMessage(guilds);
+//     });
+//     cron.schedule("0 25 12 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+//       composeMessage(guilds);
+//     });
+//     cron.schedule("0 0 16 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+//       composeMessage(guilds);
+//     });
+
+        // composeMessage(guilds);
+
         const date = new Date().toLocaleString("en-US", {
             timeZone: "Europe/Brussels"
         });
+
         const localDate = new Date(date);
         const localTime = localDate.getHours() + ":" + localDate.getMinutes();
 
         console.log(localTime);
-        botMessage = "bot is online!!";
     });
 
     // Login to Discord with your client's token
     client.login(token);
+    botStatus = "Active";
 
-    res.send({
-        message: "Bot is online!!",
-        status: 200
-    });
+    res.render('index', { status: botStatus, version: "1.0.0" })
 });
 
 module.exports = router;

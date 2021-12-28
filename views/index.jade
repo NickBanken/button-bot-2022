@@ -1,5 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    #App
+      -if (status === "Active")
+        #botActive
+          h1= status
+      -else
+        #botInactive
+          h1 Not Active
+      #logo
+        #wave
+      #version
+        p v.#{version}
