@@ -31,12 +31,9 @@ router.get("/", function(req, res, next) {
             guild.channels.cache.map(channel => {
 
                 testServers.forEach((promo, index) => {
-                    thisGuild = promo.guild_id;
                     discordChannel = promo.channel_id;
                     role = promo.role_id;
                     holidays = promo.holidays;
-                    start = promo.start;
-                    end = promo.end;
 
                     // All relevant promotions
                     if (discordChannel === channel.id.toString()) {
@@ -66,35 +63,118 @@ router.get("/", function(req, res, next) {
         });
     };
 
-    // When the client is ready, run this code (only once)
+    //     // Test Cron scheduler
+    // cron.schedule("0 55 12 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+    //   console.log("test");
+    //   // When the client is ready, run this code (only once)
+    //   client.once("ready", () => {
+    //       console.log("READY!");
+    //       const guilds = client.guilds.cache.map(guild => guild);
+
+    //       composeMessage(guilds);
+    //       const date = new Date().toLocaleString("en-US", {
+    //           timeZone: "Europe/Brussels"
+    //       });
+
+    //       const localDate = new Date(date);
+    //       const localTime = localDate.getHours() + ":" + localDate.getMinutes();
+
+    //       console.log(localTime);
+    //   });
+
+    //   client.login(token);
+    // }, { timezone : "Europe/Brussels" });
+
+    // // Actual Cron schedules
+    // cron.schedule("0 55 7 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+    //   console.log("morning");
+    //   client.once("ready", () => {
+    //       console.log("READY!");
+    //       const guilds = client.guilds.cache.map(guild => guild);
+
+    //       composeMessage(guilds);
+    //       const date = new Date().toLocaleString("en-US", {
+    //           timeZone: "Europe/Brussels"
+    //       });
+
+    //       const localDate = new Date(date);
+    //       const localTime = localDate.getHours() + ":" + localDate.getMinutes();
+
+    //       console.log(localTime);
+    //   });
+
+    //   client.login(token);
+    // });
+
+    // cron.schedule("0 31 11 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+    //   console.log("start lunch");
+    //   // When the client is ready, run this code (only once)
+    //   client.once("ready", () => {
+    //       console.log("READY!");
+    //       const guilds = client.guilds.cache.map(guild => guild);
+
+    //       composeMessage(guilds);
+    //       const date = new Date().toLocaleString("en-US", {
+    //           timeZone: "Europe/Brussels"
+    //       });
+
+    //       const localDate = new Date(date);
+    //       const localTime = localDate.getHours() + ":" + localDate.getMinutes();
+
+    //       console.log(localTime);
+    //   });
+
+    //   client.login(token);
+    // });
+
+    // cron.schedule("0 25 12 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+    //   console.log("end lunch");
+    //   // When the client is ready, run this code (only once)
+    //   client.once("ready", () => {
+    //       console.log("READY!");
+    //       const guilds = client.guilds.cache.map(guild => guild);
+
+    //       composeMessage(guilds);
+    //       const date = new Date().toLocaleString("en-US", {
+    //           timeZone: "Europe/Brussels"
+    //       });
+
+    //       const localDate = new Date(date);
+    //       const localTime = localDate.getHours() + ":" + localDate.getMinutes();
+
+    //       console.log(localTime);
+    //   });
+
+    //   client.login(token);
+    // });
+
+    // cron.schedule("0 0 16 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
+    //   console.log("evening");
+    //   // When the client is ready, run this code (only once)
+    //   client.once("ready", () => {
+    //       console.log("READY!");
+    //       const guilds = client.guilds.cache.map(guild => guild);
+
+    //       composeMessage(guilds);
+    //       const date = new Date().toLocaleString("en-US", {
+    //           timeZone: "Europe/Brussels"
+    //       });
+
+    //       const localDate = new Date(date);
+    //       const localTime = localDate.getHours() + ":" + localDate.getMinutes();
+
+    //       console.log(localTime);
+    //   });
+
+    //   client.login(token);
+    // });
+
     client.once("ready", () => {
         console.log("READY!");
         const guilds = client.guilds.cache.map(guild => guild);
 
-        // Test Cron scheduler
-        cron.schedule("0 36 17 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-          console.log("test");
-          composeMessage(guilds);
-        });
-
-        // Actual Cron schedules
-        cron.schedule("0 55 8 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-          console.log("morning");
-          composeMessage(guilds);
-        });
-        cron.schedule("0 31 11 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-          console.log("start lunch");
-          composeMessage(guilds);
-        });
-        cron.schedule("0 25 12 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-          console.log("end lunch");
-          composeMessage(guilds);
-        });
-        cron.schedule("0 0 16 * * Mon,Tue,Wed,Thu,Fri,Sat,Sun", () => {
-          console.log("evening");
-          composeMessage(guilds);
-        });
-
+        composeMessage(guilds);
+        
         const date = new Date().toLocaleString("en-US", {
             timeZone: "Europe/Brussels"
         });
@@ -105,8 +185,10 @@ router.get("/", function(req, res, next) {
         console.log(localTime);
     });
 
-    // Login to Discord with your client's token
     client.login(token);
+
+    // Login to Discord with your client's token
+
     botStatus = "Active";
 
     res.render('index', { status: botStatus, version: "1.0.0" })
