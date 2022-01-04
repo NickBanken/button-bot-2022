@@ -30,7 +30,7 @@ router.get("/", function(req, res, next) {
             // All channels on all Discord servers
             guild.channels.cache.map(channel => {
 
-                testServers.forEach((promo, index) => {
+                promotions.forEach((promo, index) => {
                     discordChannel = promo.channel_id;
                     role = promo.role_id;
                     holidays = promo.holidays;
