@@ -28,13 +28,8 @@ const groupIsWorkingToday = (group) => {
 }
 
 const sendMessageToGroup = (group, channel) => {
-    const discordChannel = group.channel_id;
     const role = group.role_id;
     const holidays = group.holidays;
-
-    if (discordChannel !== channel.id.toString()) {
-        return false;
-    }
 
     holidays.forEach((holiday) => {
         if (todayIsHoliday(holiday)) {
@@ -54,10 +49,13 @@ const sendMessageToGroup = (group, channel) => {
 const sendMessageToAllGroups = (guilds) => {
     guilds.forEach((guild, key) => {
         // All channels on all Discord servers
-        guild.channels.cache.forEach(channel => {
-            promotions.forEach((promo, index) => {
-                sendMessageToGroup(promo, channel)
-            });
+        promotions.forEach((group, index) => {
+            const channel = guild.channels.cache.find((channel) => {
+                if (group.channel_id === channel.id.toString()) {
+                    return true;
+                }
+            })
+            sendMessageToGroup(group, channel)
         });
     });
 };
