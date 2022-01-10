@@ -52,11 +52,9 @@ const sendMessageToGroup = (group, channel) => {
 
 // Get the generateMessage
 const sendMessageToAllGroups = (guilds) => {
-    // TODO: each?
-    guilds.map((guild, key) => {
+    guilds.forEach((guild, key) => {
         // All channels on all Discord servers
-        // TODO: find?
-        guild.channels.cache.map(channel => {
+        guild.channels.cache.forEach(channel => {
             promotions.forEach((promo, index) => {
                 sendMessageToGroup(promo, channel)
             });
