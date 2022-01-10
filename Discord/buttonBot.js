@@ -55,7 +55,9 @@ const sendMessageToAllGroups = (guilds) => {
                     return true;
                 }
             })
-            sendMessageToGroup(group, channel)
+            if (channel) {
+                sendMessageToGroup(group, channel)
+            }
         });
     });
 };
@@ -89,7 +91,13 @@ const buttonBot = (request, response, next) => {
     });
 
     bot.once("ready", () => {
-        buttonBotLoaded(bot)
+        console.log("READY!");
+        // Guilds is Discord terminology for servers
+        // TODO: is map needed here?
+        const guilds = bot.guilds.cache.map(guild => guild);
+
+        sendMessageToAllGroups(guilds);
+        showTimestamp()
     });
 
     // Token in .ENV
