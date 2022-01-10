@@ -55,24 +55,6 @@ module.exports = {
             ]
         },
         {
-            'name': 'Giertz',
-            'guild_id': '',
-            'channel_id': '828623199126290532',
-            'role_id': '828621933196214352',
-            'start': (new Date("2021-04-06")),
-            'end': (new Date("2021-10-29").setUTCHours(23, 59, 59)),
-            'holidays': [
-                {
-                    'start': (new Date("2021-05-31")),
-                    'end': (new Date("2021-06-06").setUTCHours(23, 59, 59))
-                },
-                {
-                    'start': (new Date("2021-08-23")),
-                    'end': (new Date("2021-08-29").setUTCHours(23, 59, 59))
-                }
-            ]
-        },
-        {
             'name': 'Regitz',
             'guild_id': '',
             'channel_id': '784047905798881280',
