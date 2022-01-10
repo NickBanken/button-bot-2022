@@ -1,5 +1,7 @@
 # Discord Button Bot
 
+⚠️ Currently in beta
+
 New button bot: Pinging selected roles from promotions in order to remind them to push the button on mybecode.org.
 
 
