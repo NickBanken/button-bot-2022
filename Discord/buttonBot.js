@@ -7,39 +7,55 @@ const { promotions } = require("./promotions");
 const { testServers } = require("./test-servers");
 const { buildMessage } = require("./generateMessage");
 
+const todayIsHoliday = (holiday) => {
+    const currentDate = new Date();
+
+    if (
+        currentDate >= holiday.start &&
+        currentDate.setUTCHours(23, 59, 59) <= holiday.end
+    ) {
+        return true;
+    }
+}
+
+const groupIsWorkingToday = (group) => {
+    const currentDate = new Date();
+
+    if ((currentDate >= group.start &&
+        currentDate.setUTCHours(23, 59, 59) <= group.end)) {
+        return true;
+    }
+}
+
 const sendMessageToGroup = (group, channel) => {
     const discordChannel = group.channel_id;
     const role = group.role_id;
     const holidays = group.holidays;
 
-    if (discordChannel === channel.id.toString()) {
-        const notAHoliday = [];
-        const currentDate = new Date();
-
-        holidays.forEach(holiday => {
-            if (
-                currentDate >= holiday.start &&
-                currentDate.setUTCHours(23, 59, 59) <= holiday.end
-            ) {
-                notAHoliday.push(false);
-            }
-        });
-
-        if (
-            notAHoliday.length === 0 &&
-            (currentDate >= group.start &&
-                currentDate.setUTCHours(23, 59, 59) <= group.end)
-        ) {
-            const unfilteredMessage = buildMessage(role);
-            channel.send(unfilteredMessage);
-        }
+    if (discordChannel !== channel.id.toString()) {
+        return false;
     }
+
+    holidays.forEach((holiday) => {
+        if (todayIsHoliday(holiday)) {
+            return false;
+        }
+    });
+
+    if (!groupIsWorkingToday(group)) {
+        return false;
+    }
+
+    const unfilteredMessage = buildMessage(role);
+    channel.send(unfilteredMessage);
 }
 
 // Get the generateMessage
-const composeMessage = guilds => {
+const sendMessageToAllGroups = (guilds) => {
+    // TODO: each?
     guilds.map((guild, key) => {
         // All channels on all Discord servers
+        // TODO: find?
         guild.channels.cache.map(channel => {
             promotions.forEach((promo, index) => {
                 sendMessageToGroup(promo, channel)
@@ -48,12 +64,7 @@ const composeMessage = guilds => {
     });
 };
 
-const buttonBotLoaded = () => {
-    console.log("READY!");
-    const guilds = client.guilds.cache.map(guild => guild);
-
-    composeMessage(guilds);
-
+const showTimestamp = () => {
     const date = new Date().toLocaleString("en-US", {
         timeZone: "Europe/Brussels"
     });
@@ -64,18 +75,27 @@ const buttonBotLoaded = () => {
     console.log(localTime);
 }
 
+const buttonBotLoaded = () => {
+    console.log("READY!");
+    // Guilds is Discord terminology for servers
+    // TODO: is map needed here?
+    const guilds = client.guilds.cache.map(guild => guild);
+
+    sendMessageToAllGroups(guilds);
+    showTimestamp()
+}
+
 const buttonBot = (request, response, next) => {
     // Create a new client instance
-    const client = new Client({
+    const bot = new Client({
         intents: [Intents.FLAGS.GUILDS],
         allowedMentions: { parse: ["users", "roles"] }
     });
 
-    client.once("ready", buttonBotLoaded);
+    bot.once("ready", buttonBotLoaded);
 
-    client.login(token);
-
-    // Login to Discord with your client's token
+    // Token in .ENV
+    bot.login(token);
 
     response.render('index', { status: "Active", version: "1.0.0" })
 }
