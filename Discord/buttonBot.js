@@ -9,8 +9,6 @@ const { buildMessage } = require("./generateMessage");
 
 router.get("/", function(req, res, next) {
 
-    let botStatus;
-
     // Create a new client instance
     const client = new Client({
         intents: [Intents.FLAGS.GUILDS],
@@ -79,9 +77,7 @@ router.get("/", function(req, res, next) {
 
     // Login to Discord with your client's token
 
-    botStatus = "Active";
-
-    res.render('index', { status: botStatus, version: "1.0.0" })
+    res.render('index', { status: "Active", version: "1.0.0" })
 });
 
 module.exports = router;

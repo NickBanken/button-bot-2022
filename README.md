@@ -13,3 +13,7 @@ The original bot was build by the amazing Manuele. His version was deprecated so
   * Auto updated from Github repository
 * Cron-job (pinging bot): Currently only access for Basile - still looking for a better option
 
+## Contributing
+
+## Testing
+
