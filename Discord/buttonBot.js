@@ -96,6 +96,8 @@ const buttonBot = (request, response, next) => {
     response.render('index', { status: "Active", version: "1.0.0" })
 }
 
-router.get("/", buttonBot(request, response, next));
+router.get("/", (request, response, next) => {
+    buttonBot(request, response, next)
+});
 
 module.exports = router;
