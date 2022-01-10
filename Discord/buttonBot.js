@@ -71,11 +71,11 @@ const showTimestamp = () => {
     console.log(localTime);
 }
 
-const buttonBotLoaded = () => {
+const buttonBotLoaded = (bot) => {
     console.log("READY!");
     // Guilds is Discord terminology for servers
     // TODO: is map needed here?
-    const guilds = client.guilds.cache.map(guild => guild);
+    const guilds = bot.guilds.cache.map(guild => guild);
 
     sendMessageToAllGroups(guilds);
     showTimestamp()
@@ -88,7 +88,9 @@ const buttonBot = (request, response, next) => {
         allowedMentions: { parse: ["users", "roles"] }
     });
 
-    bot.once("ready", buttonBotLoaded);
+    bot.once("ready", () => {
+        buttonBotLoaded(bot)
+    });
 
     // Token in .ENV
     bot.login(token);
