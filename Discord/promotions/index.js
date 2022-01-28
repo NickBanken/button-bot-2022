@@ -19,6 +19,24 @@ module.exports = {
             ]
         },
         {
+            'name': 'Arai 3',
+            'guild_id': '',
+            'channel_id': '935104408365187102',
+            'role_id': '930053504494604318',
+            'start': (new Date("2022-02-01")),
+            'end': (new Date("2022-08-19").setUTCHours(23, 59, 59)),
+            'holidays': [
+                {
+                    'start': (new Date("2022-04-04")),
+                    'end': (new Date("2022-04-08").setUTCHours(23, 59, 59))
+                },
+                {
+                    'start': (new Date("2022-07-04")),
+                    'end': (new Date("2022-07-08").setUTCHours(23, 59, 59))
+                }
+            ]
+        },
+        {
             'name': 'Arai 2',
             'guild_id': '',
             'channel_id': '841297200999170059',
