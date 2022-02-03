@@ -1,6 +1,6 @@
 # Discord Button Bot
 
-`Maintainer: Basile Leroy`
+Maintainer: `Basile Leroy`
 
 ![](./assets/bot.gif)
 
@@ -19,15 +19,13 @@ The original bot was build by the amazing Manuele. His version was deprecated ca
 
 The Previous bot used to be deployed on Glitch.com but has been moved to Replit.com instead.
 
-## How Does it work?
-
-⚠️ `Dashboard in the making!`
+## How to make use of the button for your class?
 
 **Disclaimer: you need to have admin rights on your discord server.**
 
 Currently, adding classes to the bot has to be done manually.
 
-Every class is presented as an object like this example:
+Every class is presented as an object in the [config](./Discord/promotions/index.js). An example:
 ```js
 {
     'name': 'Verou 3',
@@ -64,11 +62,10 @@ Finally... Paste your class in the promotions [list](./Discord/promotions/index.
 
 ### Tools and resources
 
-* Core code : here.
-* Replit hosting : https://replit.com/@basileLeroy/button-bot-backend#app.js
+* Replit hosting (where the bot lives): https://replit.com/@basileLeroy/button-bot-backend#app.js
   * Ask @basileLeroy for invites
   * Auto updated from Github repository
-* Cron-job (pinging bot): Currently only access for Basile - still looking for a better option
+* Cron-job (pinging bot to keep it alive): Currently only access for Basile - still looking for a better option
 
 ### 🏎️ Quick fixes
 
