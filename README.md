@@ -56,6 +56,11 @@ Every class is presented as an object in the [config](./Discord/promotions/index
 Finally... Paste your class in the promotions [list](./Discord/promotions/index.js):
 `./Discord/promotions/index.js`
 
+## Change Logs
+
+We use the Tagging system to keep track of the new changes. You can follow these in our [change log](https://github.com/becodeorg/button-bot-2022/releases)
+
+
 ## Contributing
 
 > As usual, we adhere to the **boyscouting-rule**: Leave it better than you found it!
