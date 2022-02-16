@@ -90,5 +90,23 @@ module.exports = {
                 }
             ]
         },
+        {
+            'name': 'Hamiltons',
+            'guild_id': '',
+            'channel_id': '936210062047842364',
+            'role_id': '937658982351392798',
+            'start': (new Date("2022-02-01")),
+            'end': (new Date("2022-11-22").setUTCHours(23, 59, 59)),
+            'holidays': [
+                {
+                    'start': (new Date("2022-04-04")),
+                    'end': (new Date("2022-04-08").setUTCHours(23, 59, 59))
+                },
+                {
+                    'start': (new Date("2022-07-04")),
+                    'end': (new Date("2022-07-08").setUTCHours(23, 59, 59))
+                }
+            ]
+        },
     ]
 };
